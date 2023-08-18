@@ -2,10 +2,13 @@ import discord
 
 async def sendPhoto(message):
     try:
-            photo = discord.File('General/discordBots/testBot/photos/newfy.png')
-            
+        message.channel.send("sending photos now")
+  
+        for i in range(151):
+            photo = discord.File(f"General/discordBots/testBot/photos/newfy {i}.png")
             await message.channel.send(file = photo)
-            print(f"sent photos to {message.channel}")
+
+        print(f"sent photos to {message.channel}")
     except Exception as e :
         print(e)
     
@@ -15,7 +18,9 @@ async def decodeCommand(message,command:str):
         await sendPhoto(message)
 
 def run(TOKEN):
+
     
+
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)

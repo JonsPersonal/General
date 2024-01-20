@@ -1,5 +1,4 @@
 import discord
-import 
 
 async def sendPhoto(message):
     try:
@@ -25,8 +24,6 @@ async def decodeCommand(message,command:str):
         await bullyTim(message)
 
 def run(TOKEN):
-
-
 
     intents = discord.Intents.default()
     intents.message_content = True

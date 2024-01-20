@@ -1,9 +1,9 @@
 import tokens as Token
-import discord as discord
+import discord
 import chatController as chat
 
 async def bullyRelpy(message):
-    str: response = chat.bullyThemText(message.author,message.content)
+    response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())
     try:
         await message.channel.send(response)
         print(f"message responsed in {message.channel}")
@@ -11,7 +11,7 @@ async def bullyRelpy(message):
         print(e)
 
 
-def run(str:token):
+def run():
     print("booting up the bully bot!")
     intents = discord.Intents.default()
     intents.message_content = True
@@ -31,10 +31,10 @@ def run(str:token):
 
         await bullyRelpy(message)
         
-    client.run(token)
+    client.run(Token.getBotToken())
 
 def main():
-    run(Token.getBotToken())
+    run()
  
 
 if (__name__ == '__main__'):

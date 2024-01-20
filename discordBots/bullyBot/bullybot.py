@@ -4,16 +4,12 @@ import chatController as chat
 import random
 
 async def bullyRelpy(message):
-
-    tester = random.randint(0,10)
-    print(f"responds if 1 rolled a: {tester}")
-    if(tester == 1):
-        response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())
-        try:
-            await message.reply(response)
-            print(f"message responsed in {message.channel}")
-        except Exception as e :
-           print(e)
+    response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())
+    try:
+        await message.reply(response)
+        print(f"message responsed in {message.channel}")
+    except Exception as e :
+        print(e)
 
 async def adviceRelpy(message):
     input = message.content.split()[1:]
@@ -26,15 +22,25 @@ async def adviceRelpy(message):
 
 async def drawRelpy(message):
     response = chat.drawThem(f"{message.author}",f"{message.content}", Token.getChatgptToken())
+    try:
+        if(response == type.__str__): 
+            await message.reply(response)
+        else:
+            photo = discord.File(f"photo/{message.author}.png")
+            await message.reply(file = photo)
 
+        print(f"message responsed in {message.channel}")
+    except Exception as e :
+        print(e)
 
 async def decode(message,inputstr):
     if(inputstr == "advice"):
-        ##await adviceRelpy(message)
-        print("worked")
+        await adviceRelpy(message)
+        
     if(inputstr == "draw"):
-        ##await drawRelpy(message)
-        print("draw worked")
+        await drawRelpy(message)
+    if(inputstr == "bullyMe"):
+        await bullyRelpy(message)
         
 def run():
     print("booting up the bully bot!")
@@ -53,7 +59,10 @@ def run():
         
         print(f"{message.author} sent: '{message.content}' in {message.channel}")
         if(f"{message.channel}" == 'cancerous-content'):
-            await bullyRelpy(message)
+            tester = random.randint(1,10)
+            print(f"responds if 1 rolled a: {tester}")
+            if(tester == 1):
+                await bullyRelpy(message)
         inputstr = message.content
         if(inputstr[0]=="!"):
             command = inputstr[1:].split()[0]

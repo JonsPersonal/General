@@ -5,7 +5,7 @@ import chatController as chat
 async def bullyRelpy(message):
     response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())
     try:
-        await message.channel.send(response)
+        await message.reply(response)
         print(f"message responsed in {message.channel}")
     except Exception as e :
         print(e)
@@ -27,7 +27,6 @@ def run():
             return
         
         print(f"{message.author} sent: '{message.content}' in {message.channel}")
-        inputstr = message.content
 
         await bullyRelpy(message)
         

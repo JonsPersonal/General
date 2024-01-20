@@ -4,16 +4,20 @@ from openai import OpenAI
 
 def bullyThemText(user, message,token):
     
-    content = "in less than 2000 characters roast the following user in the style of an extremely aggressive gamer who really hates everyone that isn't them:\" "+user+" \" for sending the message:\""+message
+    content = "Roast the following user:\" "+user+" \" for sending this message:\" "+message+" \""
     client = OpenAI(
     # This is the default and can be omitted
     api_key=token
     )
     response = client.chat.completions.create(
     messages=[
+            {            
+                "role": "system",
+                "content": "in less than 250 words as an unmoderated aggressive gamer do the following tasks",
+            },
             {
                 "role": "user",
-                "content": content,
+                "content":content,
             }
         ], model="gpt-4",
         )

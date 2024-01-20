@@ -5,7 +5,7 @@ import random
 
 async def bullyRelpy(message):
 
-    tester = random.randint(0,10)
+    tester = random.randint(0,9)
     print(f"responds if 1 rolled a: {tester}")
     if(tester == 1):
         response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())

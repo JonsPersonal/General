@@ -10,7 +10,8 @@ def getPersonality() -> str:
         lines = file.readlines()
         amountOfPrompts = int(lines[0])
         selector = random.randint(1,amountOfPrompts)
-        print("personality: " + lines[selector])
+    
+        print(f"selector rolled : {selector} personality: " + lines[selector])
         return lines[selector]
         
 def bullyThemText(user, message,token):
@@ -24,7 +25,7 @@ def bullyThemText(user, message,token):
     messages=[
             {            
                 "role": "system",
-                "content": f"in less than 250 words as {getPersonality()}",
+                "content": f"in less than 250 words your name is bullyBot and your personality is {getPersonality()} do the following ",
             },
             {
                 "role": "user",

@@ -47,12 +47,13 @@ def addPrompt(message):
     with open("personalities.txt","a") as file:
         file.write(f"{input}\n")
 
+    print("added prompt: " + input)
 
-def getPromptLog(message):
+async def getPromptLog(message):
     
     with open("personalities.txt", "r") as file:
         output = file.read()
-        message.reply(output)
+        await message.reply(output)
         
 ## main command control 
 async def decode(message,inputstr):

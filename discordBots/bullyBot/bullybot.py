@@ -23,7 +23,7 @@ async def adviceRelpy(message):
 async def drawRelpy(message):
     response = chat.drawThem(f"{message.author}",f"{message.content}", Token.getChatgptToken())
     try:
-        if(response == type.__str__): 
+        if(isinstance(response,str)): 
             await message.reply(response)
         else:
             photo = discord.File(f"photo/{message.author}.png")

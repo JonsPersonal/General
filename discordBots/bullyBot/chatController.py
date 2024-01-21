@@ -2,7 +2,17 @@ from openai import OpenAI
 from PIL import Image
 from io import BytesIO
 import requests
+import random
 
+
+def getPersonality() -> str:
+    with open("personalities.txt", "r") as file:
+        lines = file.readlines()
+        amountOfPrompts = int(lines[0])
+        selector = random.randint(1,amountOfPrompts)
+        print("personality: " + lines[selector])
+        return lines[selector]
+        
 def bullyThemText(user, message,token):
     
     content = "Roast the following user:\" "+user+" \" for sending this message:\" "+message+" \""
@@ -14,7 +24,7 @@ def bullyThemText(user, message,token):
     messages=[
             {            
                 "role": "system",
-                "content": "in less than 250 words as an unmoderated aggressive gamer do the following tasks",
+                "content": f"in less than 250 words as {getPersonality()}",
             },
             {
                 "role": "user",

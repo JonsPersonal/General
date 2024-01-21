@@ -62,7 +62,7 @@ async def decode(message,inputstr):
     if(inputstr == "addPrompt"):
         addPrompt(message)
     if(inputstr == "promptLog"):
-        getPromptLog(message)
+        await getPromptLog(message)
     if(inputstr == "draw"):
         await drawRelpy(message)
     if(inputstr == "bullyMe"):

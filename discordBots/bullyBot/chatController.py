@@ -24,7 +24,7 @@ def bullyThemText(user, message,token):
 
 def drawThem(user,prompt,token):
     client = OpenAI(api_key= token)
-
+    print("drawing...")
     try: 
         response = client.images.generate(
         model="dall-e-3",

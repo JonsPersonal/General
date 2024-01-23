@@ -12,10 +12,16 @@ async def bullyRelpy(message):
         print(e)
 
 async def adviceRelpy(message):
-    input = message.content[1:]
+    input = message.content[8:]
     response = chat.adviseThem(f"{message.author}",input, Token.getChatgptToken())
+    relpies = []
     try:
-        await message.reply(response)
+        words = response.split()
+        for i in range(0, len(words),400):
+            reply = " ".join(words[i:i+400])
+            relpies.append(reply)
+        for reply in relpies:
+            await message.reply(reply)
         print(f"message responsed in {message.channel}")
     except Exception as e :
            print(e)
@@ -25,6 +31,7 @@ async def drawRelpy(message):
     try:
         if(isinstance(response,str)): 
             await message.reply(response)
+            bullyRelpy(message)
         else:
             photo = discord.File(f"photo/{message.author}.png")
             await message.reply(file = photo)
@@ -69,7 +76,7 @@ async def decode(message,inputstr):
     if(inputstr == "bullyMe"):
         await bullyRelpy(message)
 
-def run():
+def main():
     print("booting up the bully bot!")
     intents = discord.Intents.default()
     intents.message_content = True
@@ -100,9 +107,6 @@ def run():
 
     client.run(Token.getBotToken())
 
-def main():
-    run()
- 
 
 if (__name__ == '__main__'):
     main()

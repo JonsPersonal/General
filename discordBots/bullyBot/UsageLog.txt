@@ -1,2 +1,3 @@
-dunkinoreos bullied: 3, advised: 4, drew: 0
-luke.s3652 bullied: 1, advised: 0, drew: 0
+dunkinoreos bullied: 5, advised: 12, drew: 1
+luke.s3652 bullied: 1, advised: 0, drew: 14
+scattereddice bullied: 1, advised: 0, drew: 0

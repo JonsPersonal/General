@@ -27,10 +27,15 @@ def logUse(user: str, type: str):
 
             pattern = r'\d+'
             integers = re.findall(pattern, newLine)
-            bullied = int(integers[0])
-            advised = int(integers[1])
-            drew = int(integers[2])
-
+            
+            if integers.__len__() ==3 :
+                bullied = int(integers[0])
+                advised = int(integers[1])
+                drew = int(integers[2])
+            else:
+                bullied = int(integers[1])
+                advised = int(integers[2])
+                drew = int(integers[3])
             if type == "bullied":
                 bullied += 1
             elif type == "advised":

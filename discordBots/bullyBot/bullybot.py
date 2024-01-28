@@ -3,6 +3,7 @@ import discord
 import chatController as chat
 import random
 
+##### Chat gpt Commmands #####
 async def bullyRelpy(message):
     response = chat.bullyThemText(f"{message.author}",f"{message.content}", Token.getChatgptToken())
     try:
@@ -16,12 +17,18 @@ async def adviceRelpy(message):
     response = chat.adviseThem(f"{message.author}",input, Token.getChatgptToken())
     relpies = []
     try:
-        words = response.split()
-        for i in range(0, len(words),400):
-            reply = " ".join(words[i:i+400])
-            relpies.append(reply)
-        for reply in relpies:
-            await message.reply(reply)
+        if(len(response) <= 2000):
+            await message.reply(response)
+        else:
+            remainder = len(response)%2000
+            print("making mutliple relpies")
+            for i in range(len(response)//2000):
+                relpies.append(response[i*2000:(i+1)*2000])
+
+            relpies.append(response[-remainder:])
+            print(relpies)
+            for reply in relpies:
+                await message.reply(reply)
         print(f"message responsed in {message.channel}")
     except Exception as e :
            print(e)
@@ -40,6 +47,12 @@ async def drawRelpy(message):
     except Exception as e :
         print(e)
 
+###### Bot Commands  ######
+async def getUsageLog(message):
+       with open("UsageLog.txt", "r") as file:
+        output = file.read()
+        await message.reply(output)
+
 def addPrompt(message):
     input = message.content[11:]
     
@@ -57,12 +70,14 @@ def addPrompt(message):
     print("added prompt: " + input)
 
 async def getPromptLog(message):
-    
     with open("personalities.txt", "r") as file:
         output = file.read()
         await message.reply(output)
-        
-## main command control 
+
+async def getListOfCommands(message):
+    await message.reply("list of commands are : !advice, !addPrompt, !draw, !bullyMe, !UsageLog, !help")
+
+##### main command control #####
 async def decode(message,inputstr):
     
     if(inputstr == "advice"):
@@ -75,6 +90,10 @@ async def decode(message,inputstr):
         await drawRelpy(message)
     if(inputstr == "bullyMe"):
         await bullyRelpy(message)
+    if(inputstr =="UsageLog"):
+        await getUsageLog(message)
+    if(inputstr =="help"):
+        await getListOfCommands(message)
 
 def main():
     print("booting up the bully bot!")

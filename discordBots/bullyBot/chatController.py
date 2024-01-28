@@ -126,7 +126,7 @@ def adviseThem(user, message,token):
     messages=[
             {            
                 "role": "system",
-                "content": f"help {user} in the best way possible",
+                "content": f"assist {user}",
             },
             {
                 "role": "user",
